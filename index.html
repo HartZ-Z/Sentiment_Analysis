@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tweet Sentiment Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Analyze Tweets Sentiment</h1>
+    <form id="tweetForm">
+        <input type="text" id="keyword" placeholder="Enter keyword or hashtag" required>
+        <input type="number" id="no_of_tweets" placeholder="Number of tweets" required>
+        <button type="submit">Analyze</button>
+    </form>
+    <canvas id="sentimentChart" width="400" height="400"></canvas>
+    <script>
+        document.getElementById('tweetForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const keyword = document.getElementById('keyword').value;
+            const no_of_tweets = document.getElementById('no_of_tweets').value;
+
+            // Fetch sentiment data from the backend
+            fetch(`/analyze?keyword=${keyword}&no_of_tweets=${no_of_tweets}`)
+                .then(response => response.json())
+                .then(data => {
+                    const ctx = document.getElementById('sentimentChart').getContext('2d');
+                    const chart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['Positive', 'Negative', 'Neutral'],
+                            datasets: [{
+                                label: 'Sentiment Analysis',
+                                data: data.sentiment_counts,
+                                backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56']
+                            }]
+                        },
+                        options: {
+                            responsive: true
+                        }
+                    });
+                });
+        });
+    </script>
+</body>
+</html>
