@@ -10,7 +10,7 @@ import time
 
 # Replace with your actual Bearer Token
 
-BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAJxq0QEAAAAAtZl%2BMx7yJ201JDVJPW7v6fnq1I4%3DxHkEompCaezhjM4Bh4LCXBOFcvQdpRbzussbwlLpLo4S6l4OV8'
+BEARER_TOKEN = 'Your Bearer Key'
 
 
 

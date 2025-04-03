@@ -5,7 +5,7 @@ import time
 
 app = Flask(__name__)
 
-BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAENR0QEAAAAAc1MLR4UdwwUJkYVIngWdyKAR15E%3DwEZXbQPan91cgycGaOal4vIQH0ysoCMe3EJQjac281VEutlQZ8'
+BEARER_TOKEN = 'Your Bearer Key'
 client = tweepy.Client(bearer_token=BEARER_TOKEN, wait_on_rate_limit=True)
 
 def fetch_tweets(query, max_results=40):
