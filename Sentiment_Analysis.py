@@ -10,13 +10,15 @@ import time
 
 # Replace with your actual Bearer Token
 
-BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAENR0QEAAAAAc1MLR4UdwwUJkYVIngWdyKAR15E%3DwEZXbQPan91cgycGaOal4vIQH0ysoCMe3EJQjac281VEutlQZ8'
+BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAJxq0QEAAAAAtZl%2BMx7yJ201JDVJPW7v6fnq1I4%3DxHkEompCaezhjM4Bh4LCXBOFcvQdpRbzussbwlLpLo4S6l4OV8'
 
 
 
 # Initialize Twitter API client with rate limit handling enabled
 
+
 client = tweepy.Client(bearer_token=BEARER_TOKEN, wait_on_rate_limit=True)
+
 
 
 
@@ -26,7 +28,7 @@ def fetch_tweets(query, max_results=40):
 
     retries = 0
 
-    while retries < 5:  # Retry up to 5 times
+    while retries < 3:  # Retry up to 3 times
 
         try:
 
@@ -36,9 +38,9 @@ def fetch_tweets(query, max_results=40):
 
         except tweepy.errors.TooManyRequests as e:
 
-            print(f"Rate limit exceeded. Retrying in {2**retries} seconds...")
+            print(f"Rate limit exceeded. Retrying in {5*(2**retries)} seconds...")
 
-            time.sleep(2**retries)  # Exponential backoff
+            time.sleep(5*(2**retries))  # Exponential backoff
 
             retries += 1
 
@@ -84,7 +86,7 @@ def visualize_results(sentiment_counts):
 
     labels = ['Positive', 'Negative', 'Neutral']
 
-    plt.pie(labels, sentiment_counts)
+    plt.bar(labels, sentiment_counts)
 
     plt.title('Sentiment Analysis of Tweets')
 
